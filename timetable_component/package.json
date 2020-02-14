@@ -1,0 +1,20 @@
+{
+  "name": "timetable_component",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "mix_files": "rm -f src/TimetableLib.jsx && cat src/TimeSlot.jsx src/ComplexTimeSlot.jsx src/Timetable.jsx src/ComplexTimetable.jsx > src/TimetableLib.jsx",
+    "babel": "npx babel --presets react  src/TimetableLib.jsx --out-file dist/js/generated/TimetableLib.js",
+    "mix_and_compile": "npm run mix_files && npm run babel"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2",
+    "npx": "^10.2.2"
+  }
+}

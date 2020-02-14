@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div style="display: flex;">
+    <div id="timetable-1" style="margin:10px;"> </div>
+    <div id="timetable-2" style="margin:10px;"> </div>
+    <div id="timetable-mix" style="margin:10px;"> </div>
+</div>
+
+<!-- Load React -->
+<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+<!-- Load components -->
+<script src="dist/js/generated/TimetableLib.js"></script>
+<script src="dist/js/timetable_utils.js"></script>
+<script src="../observer/dist/js/Observer.js"></script>
+</body>
+<script>
+
+    // create time ranges
+    var timeranges = {
+        1: [
+            {day:"monday", from:8, to:12.5},
+            {day:"tuesday", from:8, to:12.5},
+            {day:"wednesday", from:16, to:20},
+            {day:"thursday", from:8, to:12.5},
+            {day:"friday", from:8, to:12.5}
+        ],
+        2: [
+            {day:"saturday", from:19, to:21},
+            {day:"sunday", from:19, to:21}
+        ]
+    };
+
+    // get the containers' elements
+    var container1 = document.getElementById("timetable-1");
+    var container2 = document.getElementById("timetable-2");
+    var containerMix = document.getElementById("timetable-mix");
+
+    // create an Observer
+    var changesObserver = new Observer();
+
+    // Create element
+    ReactDOM.render( React.createElement(Timetable,{id:"1", autoUpdate:true, modifiable:true, publishTo: changesObserver, initialTimeRanges:timeranges[1]}), container1);
+    ReactDOM.render( React.createElement(Timetable,{id:"2", autoUpdate:true, modifiable:true, publishTo: changesObserver, initialTimeRanges:timeranges[2]}), container2);
+    ReactDOM.render( React.createElement(ComplexTimetable,{subscribeTo: changesObserver, initialTimeRanges:timeranges}), containerMix);
+
+
+</script>
+</html>
